@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\BlogsComments;
+
 use Auth;
 
 class BlogController extends Controller
@@ -68,4 +70,13 @@ class BlogController extends Controller
         $blog->delete();
         return redirect('/home')->with('success','Blog deleted successfully!');
     }
+	
+	public function viewcomments($id)
+    {
+		$blogs = Blog::find($id);
+		$blog_comments =  BlogsComments::where('blog_id',$id)->get();
+        return view('viewcomments', compact('blogs','blog_comments'));
+    }
+	
+	
 }

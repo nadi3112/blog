@@ -9,21 +9,22 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>S NO.</th>
                             <th>Title</th>
                             
                             <th colspan="2">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody><?php $count=1;?>
                         @foreach($blogs as $blog)
                         <tr>
-                            <td>{{ $blog->id }}</td>
+                            <td><?= $count; ?></td>
                             <td>{{ $blog->title }}</td>
                             
                             <td>
-                            
+                            <a href="blog/{{$blog->id}}/viewcomments" class="btn btn-primary">View Comments</a>
                             <a href="blog/{{$blog->id}}/edit" class="btn btn-primary">Edit</a>
+							
                             <form action="blog/{{$blog->id}}" method="post" class="d-inline">
                                 {{ csrf_field() }}
                                 @method('DELETE')
@@ -31,6 +32,7 @@
                             </form>
                             </td>
                         </tr>
+						<?php $count++ ;?>
                         @endforeach
                     </tbody>
                 </table>
